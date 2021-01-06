@@ -10,12 +10,14 @@ export default class GotService {
         return some;
     }
 
-    getAllCharacters() {
-        return this.getResource('/characters/')
+    async getAllCharacters() {
+        const char = await this.getResource(`/characters/`);
+        return char.map(this._transformChar);
     }
 
-    getCharacter(id) {
-        return this.getResource(`/characters/${id}`)
+    async getCharacter(id) {
+        const char = await this.getResource(`/characters/${id}`);
+        return this._transformChar(char);
     }
 
     getAllHouses() {
@@ -32,5 +34,15 @@ export default class GotService {
 
     getBook(id) {
         return this.getResource(`/books/${id}`)
+    }
+
+    _transformChar(pers) {
+        return {
+            name: pers.name,
+            gender: pers.gender,
+            culture: pers.culture,
+            born: pers.born,
+            died: pers.died,
+        }
     }
 }
