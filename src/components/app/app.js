@@ -5,16 +5,22 @@ import RandomChar from '../randomChar';
 import ItemList from '../itemList';
 import CharDetails from '../charDetails';
 
+import gotService from '../../services/gotService'
+
 import './apps.css'
 
 
 class App extends React.Component {
+
+    got = new gotService()
+
     constructor() {
         super()
         this.state = {
-            randomCharVisual: true
+            randomCharVisual: true,
+            char: {}
         }
-        // this.toggleRandChar = this.toggleRandChar.bind(this)
+        this.toggleRandChar = this.toggleRandChar.bind(this)
     }
 
     toggleRandChar = () => {
@@ -23,8 +29,19 @@ class App extends React.Component {
         })
     }
 
+    getChar = id => {
+        this.got.getCharacter(id)
+        .then(char => this.setState({char}));
+    }
+
+    forDataEmpty = (obj) => {
+        Object.keys(obj).map(function(key, index) {
+            if (!obj[key]) obj[key] = "No Data";
+      });}
+
 
     render() {
+        // console.log(this.state)
         return (
             <> 
             <Container>
@@ -33,7 +50,7 @@ class App extends React.Component {
             <Container>
                 <Row>
                     <Col lg={{size: 5, offset: 0}}>
-                        {this.state.randomCharVisual && <RandomChar/>}
+                        {this.state.randomCharVisual && <RandomChar forDataEmpty={this.forDataEmpty}/>}
                         <button 
                             className="btn btn-dark mt-0 mb-5"
                             onClick={this.toggleRandChar}
@@ -43,10 +60,10 @@ class App extends React.Component {
                 </Row>
                 <Row>
                     <Col md='6'>
-                        <ItemList />
+                        <ItemList getChar={this.getChar} />
                     </Col>
                     <Col md='6'>
-                        <CharDetails />
+                        <CharDetails char={this.state.char} forDataEmpty={this.forDataEmpty}/>
                     </Col>
                 </Row>
             </Container>

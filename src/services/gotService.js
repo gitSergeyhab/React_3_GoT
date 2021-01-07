@@ -5,13 +5,13 @@ export default class GotService {
 
     async getResource(url) {
         const result = await fetch(`${this._urlBase}${url}`);
-        if (!result.ok) throw new Error(`Error status: ${result.status}`)
+        if (!result.ok) throw new Error(`Error status: ${result.status} !!!`)
         const some = await result.json();
         return some;
     }
 
     async getAllCharacters() {
-        const char = await this.getResource(`/characters/`);
+        const char = await this.getResource(`/characters?page=25&pageSize=7`);
         return char.map(this._transformChar);
     }
 

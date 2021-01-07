@@ -7,15 +7,10 @@ import ErrorMessage from '../errorMessage/errorMessage';
 
 export default class RandomChar extends Component {
 
-    // constructor() {
-    //     super();
-    // }
-
     componentDidMount() {
         this.updateChar();
-        this.timer = setInterval(this.updateChar, 3000);
+        this.timer = setInterval(this.updateChar, 1000);
     }
-
 
     componentWillUnmount(){
         clearInterval(this.timer)
@@ -49,6 +44,7 @@ export default class RandomChar extends Component {
 
     render() {
         const{pers, loading, error} = this.state
+        this.props.forDataEmpty(pers)
         
         return (
             <div className="random-block rounded">
