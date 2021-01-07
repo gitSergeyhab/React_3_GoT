@@ -7,9 +7,18 @@ import ErrorMessage from '../errorMessage/errorMessage';
 
 export default class RandomChar extends Component {
 
-    constructor() {
-        super();
+    // constructor() {
+    //     super();
+    // }
+
+    componentDidMount() {
         this.updateChar();
+        this.timer = setInterval(this.updateChar, 3000);
+    }
+
+
+    componentWillUnmount(){
+        clearInterval(this.timer)
     }
 
     got = new gotService();
@@ -31,7 +40,7 @@ export default class RandomChar extends Component {
         })
     }
 
-    updateChar() {
+    updateChar = () => {
         const id = Math.floor(Math.random()*666 + 33);
         this.got.getCharacter(id)
             .then(this.onCharLoaded)
