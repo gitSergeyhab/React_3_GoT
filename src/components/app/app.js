@@ -9,7 +9,6 @@ import gotService from '../../services/gotService'
 
 import './apps.css'
 
-
 class App extends React.Component {
 
     got = new gotService()
@@ -41,7 +40,7 @@ class App extends React.Component {
 
 
     render() {
-        // console.log(this.state)
+
         return (
             <> 
             <Container>
@@ -71,45 +70,5 @@ class App extends React.Component {
         )
     }
 }
-
-// const App = () => {
-//     return (
-//         <> 
-//             <Container>
-//                 <Header />
-//             </Container>
-//             <Container>
-//                 <Row>
-//                     <Col lg={{size: 5, offset: 0}}>
-//                         <RandomChar/>
-//                         <BtnForRandomChar/>
-//                     </Col>
-//                 </Row>
-//                 <Row>
-//                     <Col md='6'>
-//                         <ItemList />
-//                     </Col>
-//                     <Col md='6'>
-//                         <CharDetails />
-//                     </Col>
-//                 </Row>
-//             </Container>
-//         </>
-//     );
-// };
-
-// const BtnForRandomChar = () => {
-//     return (
-//     <button 
-//         className="btn btn-dark mt-0 mb-5"
-//         onClick={toggleRandChar}
-//         >Toggle Random Chararacter
-//     </button>)
-// }
-
-// function toggleRandChar() {
-//     const randomChar = document.querySelector('.random-block');
-//     randomChar.classList.toggle('display-none')
-// }
 
 export default App;

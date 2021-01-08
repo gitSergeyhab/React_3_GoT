@@ -18,7 +18,6 @@ export default class ItemList extends Component {
     }
 
     render() {
-        // console.log(this.state.charList);
 
         const charList = this.state.charList
         if (!charList) return <Spiner/>
@@ -26,9 +25,9 @@ export default class ItemList extends Component {
         const personsLi = this.state.charList.map((pers, i) => {
             return (
                 <li 
-                    key={`${pers.name}-${i}`} 
+                    key={pers.url} 
                     className="list-group-item"
-                    onClick={() => this.props.getChar(i+7*25-6)}
+                    onClick={() => this.props.getChar(pers.url)}
                 >
                     {pers.name}
                 </li>

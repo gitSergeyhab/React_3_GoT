@@ -5,11 +5,14 @@ import './charDetails.css';
 export default class CharDetails extends Component {
 
     render() {
-        // console.log('char', this.props.char)
-        if (Object.keys(this.props.char).length === 0) return <h2 className="char-details rounded text-center">Choise anyone</h2>;
+        
+        if (Object.keys(this.props.char).length === 0) {
+            return <h2 className="char-details rounded text-center">Choise anyone</h2>
+        };
+
         this.props.forDataEmpty(this.props.char)
         const {name, gender, born, died, culture} = this.props.char
-        // console.log(name, gender, born, died, culure)
+
         return (
             <div className="char-details rounded">
                 <h4>{name}</h4>

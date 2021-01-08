@@ -43,6 +43,7 @@ export default class GotService {
             culture: pers.culture,
             born: pers.born,
             died: pers.died,
+            url: +pers.url.match(/\d+/)[0]
         }
     }
 
