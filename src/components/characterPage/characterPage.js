@@ -26,6 +26,7 @@ export default class CharacterPage extends React.Component {
     }
 
     getId = id => {
+        console.log(id)
         this.setState({itemId: id})
     }
 
@@ -45,7 +46,7 @@ export default class CharacterPage extends React.Component {
         );
 
         const charDetails = (
-        <CharDetails itemId={this.state.itemId}>
+        <CharDetails itemId={this.state.itemId} getDatas = {this.got.getCharacter}>
             <Field field='gender' label='Gender'/>
             <Field field='culture' label='Culture'/>
             <Field field='born' label='Born'/>

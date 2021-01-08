@@ -27,6 +27,7 @@ export default class CharDetails extends Component {
     }
 
     componentDidUpdate(prevProps){
+
         if (this.props.itemId !== prevProps.itemId) {
             this.getItemFromId()
         }
@@ -34,8 +35,10 @@ export default class CharDetails extends Component {
 
     getItemFromId = () => {
         if (!this.props.itemId) return;
+        const {getDatas} = this.props;
+        console.log(this.props)
         
-        this.got.getCharacter(this.props.itemId)
+        getDatas(this.props.itemId)
             .then(item => this.setState({item}))
         // this.foo.bar = 0 // special fall
     }
@@ -47,6 +50,8 @@ export default class CharDetails extends Component {
         const {item} = this.state;
 
         const {name} = item;
+
+       
                 
 
         return (
@@ -58,26 +63,6 @@ export default class CharDetails extends Component {
                             return React.cloneElement(child, {item})
                         })
                     }
-
-
-
-                    {/* {this.props.children} */}
-                    {/* <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Gender</span>
-                        <span>{gender}</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Born</span>
-                        <span>{born}</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Died</span>
-                        <span>{died}</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Culture</span>
-                        <span>{culture}</span>
-                    </li> */}
                 </ul>
             </div>
         );

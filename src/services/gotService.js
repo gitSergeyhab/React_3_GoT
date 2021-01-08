@@ -27,7 +27,7 @@ export default class GotService {
 
     getHouse = async(id) => {
         const house = await this.getResource(`/houses/${id}`)
-        return house._transformHouse
+        return this._transformHouse(house)
     }
 
     getAllbooks = async() => {
@@ -58,7 +58,8 @@ export default class GotService {
             words: this.noData(house.words),
             titles: this.noData(house.titles),
             overlord: this.noData(house.overlord),
-            ancestralWeapons: this.noData(house.ancestralWeapons)
+            ancestralWeapons: this.noData(house.ancestralWeapons),
+            url: +house.url.match(/\d+/)[0]
         }
     }
     
@@ -68,11 +69,14 @@ export default class GotService {
             numberOfPages: this.noData(book.numberOfPages),
             publiser: this.noData(book.publiser),
             released: this.noData(book.released),
+            url: +book.url.match(/\d+/)[0]
         }
     }
 
     noData(data) {
-        if(data) return data
-        return 'NO DATA'
+
+        if (!data || data.length < 2) return "No Data";
+        return data;
+
     }
 }

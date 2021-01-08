@@ -2,9 +2,12 @@ import React from 'react';
 import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
-import CharacterPage from '../characterPage/characterPage'
 
-import './apps.css'
+import CharacterPage from '../characterPage/characterPage';
+import BookPage from '../bookPage/bookPage';
+import HousePage from '../housePage/housePage';
+
+import './apps.css';
 
 
 import ItemList from '../itemList';
@@ -49,38 +52,14 @@ class App extends React.Component {
                 </Row>
 
                 <CharacterPage/>
-
-                <Row>
-                    <Col md='6'>
-                        <ItemList 
-                            getId={this.getId} 
-                            getData = {this.got.getAllbooks}
-                            renderNeedFields={item => item.name}
-                        />
-                    </Col>
-                    <Col md='6'>
-                        <CharDetails itemId={this.state.itemId} 
-                        />
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col md='6'>
-                        <ItemList 
-                            getId={this.getId} 
-                            getData = {this.got.getAllHouses}
-                            renderNeedFields={({name, region}) => `${name} (${region})`}
-                        />
-                    </Col>
-                    <Col md='6'>
-                        <CharDetails itemId={this.state.itemId} 
-                        />
-                    </Col>
-                </Row>
+                <BookPage/>
+                <HousePage/>
+                
             </Container>
         </>
         )
     }
 }
+
 
 export default App;

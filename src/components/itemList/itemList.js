@@ -19,6 +19,7 @@ export default class ItemList extends Component {
             })
     }
 
+
     render() {
 
         const itemList = this.state.itemList
@@ -30,9 +31,11 @@ export default class ItemList extends Component {
                 <li 
                     key={item.url} 
                     className="list-group-item"
+                    // onClick={() => console.log(item.url)}
                     onClick={() => this.props.getId(item.url)}
                 >
                     {visualItem} 
+                    {/* {item.name} */}
                 </li>
                 )
         })
