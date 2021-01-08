@@ -2,22 +2,23 @@ import React from 'react';
 import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
-import ItemList from '../itemList';
-import CharDetails from '../charDetails';
-
-import gotService from '../../services/gotService'
+import CharacterPage from '../characterPage/characterPage'
 
 import './apps.css'
 
-class App extends React.Component {
 
-    got = new gotService()
+import ItemList from '../itemList';
+import CharDetails from '../charDetails';
+
+import gotService from '../../services/gotService';
+
+class App extends React.Component {
+    got = new gotService();
 
     constructor() {
         super()
         this.state = {
             randomCharVisual: true,
-            charId: null
         }
         this.toggleRandChar = this.toggleRandChar.bind(this)
     }
@@ -27,15 +28,6 @@ class App extends React.Component {
             randomCharVisual: !this.state.randomCharVisual
         })
     }
-
-    getCharId = id => {
-        this.setState({charId: id})
-    }
-
-    forDataEmpty = (obj) => {
-        Object.keys(obj).map(function(key, index) {
-            if (!obj[key]) obj[key] = "No Data";
-      });}
 
     render() {
 
@@ -47,7 +39,7 @@ class App extends React.Component {
             <Container>
                 <Row>
                     <Col lg={{size: 5, offset: 0}}>
-                        {this.state.randomCharVisual && <RandomChar forDataEmpty={this.forDataEmpty}/>}
+                        {this.state.randomCharVisual && <RandomChar/>}
                         <button 
                             className="btn btn-dark mt-0 mb-5"
                             onClick={this.toggleRandChar}
@@ -55,12 +47,34 @@ class App extends React.Component {
                         </button>
                     </Col>
                 </Row>
+
+                <CharacterPage/>
+
                 <Row>
                     <Col md='6'>
-                        <ItemList getCharId={this.getCharId} />
+                        <ItemList 
+                            getId={this.getId} 
+                            getData = {this.got.getAllbooks}
+                            renderNeedFields={item => item.name}
+                        />
                     </Col>
                     <Col md='6'>
-                        <CharDetails charId={this.state.charId} forDataEmpty={this.forDataEmpty}/>
+                        <CharDetails itemId={this.state.itemId} 
+                        />
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col md='6'>
+                        <ItemList 
+                            getId={this.getId} 
+                            getData = {this.got.getAllHouses}
+                            renderNeedFields={({name, region}) => `${name} (${region})`}
+                        />
+                    </Col>
+                    <Col md='6'>
+                        <CharDetails itemId={this.state.itemId} 
+                        />
                     </Col>
                 </Row>
             </Container>

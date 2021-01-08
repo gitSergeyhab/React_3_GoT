@@ -2,46 +2,67 @@ import React, {Component} from 'react';
 import './charDetails.css';
 import gotService from '../../services/gotService';
 
+const Field = ({item, field, label}) => {
+    return (
+        <li className="list-group-item d-flex justify-content-between">
+            <span className="term">{label}</span>
+            <span>{item[field]}</span>
+        </li>
+
+    )
+}
+
+export {Field};
+
 
 export default class CharDetails extends Component {
 
     got = new gotService();
     state = {
-        char: null
+        item: null
     }
 
     componentDidMount() {
-        this.getCharFromId()
+        this.getItemFromId()
     }
 
     componentDidUpdate(prevProps){
-        if (this.props.charId !== prevProps.charId) {
-            this.getCharFromId()
+        if (this.props.itemId !== prevProps.itemId) {
+            this.getItemFromId()
         }
     }
 
-    getCharFromId = () => {
-        if (!this.props.charId) return;
+    getItemFromId = () => {
+        if (!this.props.itemId) return;
         
-        this.got.getCharacter(this.props.charId)
-        .then(char => this.setState({char}))
+        this.got.getCharacter(this.props.itemId)
+            .then(item => this.setState({item}))
+        // this.foo.bar = 0 // special fall
     }
 
     render() {
-        if (!this.state.char) {
+        if (!this.state.item) {
             return <h2 className="char-details rounded text-center">Choise anyone</h2>
         };
+        const {item} = this.state;
 
-        
-
-        this.props.forDataEmpty(this.state.char)
-        const {name, gender, born, died, culture} = this.state.char
+        const {name} = item;
+                
 
         return (
             <div className="char-details rounded">
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item d-flex justify-content-between">
+                    {
+                        React.Children.map(this.props.children, (child) => {
+                            return React.cloneElement(child, {item})
+                        })
+                    }
+
+
+
+                    {/* {this.props.children} */}
+                    {/* <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Gender</span>
                         <span>{gender}</span>
                     </li>
@@ -56,7 +77,7 @@ export default class CharDetails extends Component {
                     <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Culture</span>
                         <span>{culture}</span>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         );

@@ -9,7 +9,7 @@ export default class RandomChar extends Component {
 
     componentDidMount() {
         this.updateChar();
-        this.timer = setInterval(this.updateChar, 1000);
+        this.timer = setInterval(this.updateChar, 3333);
     }
 
     componentWillUnmount(){
@@ -44,7 +44,6 @@ export default class RandomChar extends Component {
 
     render() {
         const{pers, loading, error} = this.state
-        this.props.forDataEmpty(pers)
         
         return (
             <div className="random-block rounded">
