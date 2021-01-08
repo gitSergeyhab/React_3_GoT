@@ -1,17 +1,41 @@
 import React, {Component} from 'react';
 import './charDetails.css';
+import gotService from '../../services/gotService';
 
 
 export default class CharDetails extends Component {
 
-    render() {
+    got = new gotService();
+    state = {
+        char: null
+    }
+
+    componentDidMount() {
+        this.getCharFromId()
+    }
+
+    componentDidUpdate(prevProps){
+        if (this.props.charId !== prevProps.charId) {
+            this.getCharFromId()
+        }
+    }
+
+    getCharFromId = () => {
+        if (!this.props.charId) return;
         
-        if (Object.keys(this.props.char).length === 0) {
+        this.got.getCharacter(this.props.charId)
+        .then(char => this.setState({char}))
+    }
+
+    render() {
+        if (!this.state.char) {
             return <h2 className="char-details rounded text-center">Choise anyone</h2>
         };
 
-        this.props.forDataEmpty(this.props.char)
-        const {name, gender, born, died, culture} = this.props.char
+        
+
+        this.props.forDataEmpty(this.state.char)
+        const {name, gender, born, died, culture} = this.state.char
 
         return (
             <div className="char-details rounded">

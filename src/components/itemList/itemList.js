@@ -27,7 +27,7 @@ export default class ItemList extends Component {
                 <li 
                     key={pers.url} 
                     className="list-group-item"
-                    onClick={() => this.props.getChar(pers.url)}
+                    onClick={() => this.props.getCharId(pers.url)}
                 >
                     {pers.name}
                 </li>

@@ -17,7 +17,7 @@ class App extends React.Component {
         super()
         this.state = {
             randomCharVisual: true,
-            char: {}
+            charId: null
         }
         this.toggleRandChar = this.toggleRandChar.bind(this)
     }
@@ -28,16 +28,14 @@ class App extends React.Component {
         })
     }
 
-    getChar = id => {
-        this.got.getCharacter(id)
-        .then(char => this.setState({char}));
+    getCharId = id => {
+        this.setState({charId: id})
     }
 
     forDataEmpty = (obj) => {
         Object.keys(obj).map(function(key, index) {
             if (!obj[key]) obj[key] = "No Data";
       });}
-
 
     render() {
 
@@ -59,10 +57,10 @@ class App extends React.Component {
                 </Row>
                 <Row>
                     <Col md='6'>
-                        <ItemList getChar={this.getChar} />
+                        <ItemList getCharId={this.getCharId} />
                     </Col>
                     <Col md='6'>
-                        <CharDetails char={this.state.char} forDataEmpty={this.forDataEmpty}/>
+                        <CharDetails charId={this.state.charId} forDataEmpty={this.forDataEmpty}/>
                     </Col>
                 </Row>
             </Container>
