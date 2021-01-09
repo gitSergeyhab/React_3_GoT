@@ -8,7 +8,7 @@ import BlockListAndDetails from '../blockListAndDetails/blockListAndDetails'
 import gotService from '../../services/gotService';
 import ErrorMessage from '../errorMessage/errorMessage';
 
-import CharacterPage from '../characterPage/characterPage';
+import CharacterPage from './characterPage';
 
 
 export default class BookPage extends CharacterPage {

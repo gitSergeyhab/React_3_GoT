@@ -8,8 +8,6 @@ import BlockListAndDetails from '../blockListAndDetails/blockListAndDetails'
 import gotService from '../../services/gotService';
 import ErrorMessage from '../errorMessage/errorMessage'
 
-
-
 export default class CharacterPage extends React.Component {
     got = new gotService()
 
@@ -26,7 +24,6 @@ export default class CharacterPage extends React.Component {
     }
 
     getId = id => {
-        console.log(id)
         this.setState({itemId: id})
     }
 
