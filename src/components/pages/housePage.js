@@ -1,17 +1,25 @@
 import React from 'react';
-import {Col, Row, Container} from 'reactstrap';
 import ItemList from '../itemList';
-import CharDetails, {Field} from '../charDetails';
-import BlockListAndDetails from '../blockListAndDetails/blockListAndDetails'
-
 
 import gotService from '../../services/gotService';
 import ErrorMessage from '../errorMessage/errorMessage';
 
-import CharacterPage from './characterPage';
+import {withRouter} from 'react-router-dom'
 
 
-export default class HousePage extends CharacterPage {
+class HousePage extends React.Component {
+
+    got = new gotService()
+
+    state = {
+        error: false
+    }
+
+    componentDidCatch() {
+        this.setState({
+            error: true
+        })
+    }
 
     render () {
 
@@ -20,30 +28,14 @@ export default class HousePage extends CharacterPage {
             return <ErrorMessage/>
         }
 
-        const itemList = (                    
+        return (
             <ItemList 
-                getId={this.getId} 
+                getId={id =>{this.props.history.push(`/houses/${id}`)}} 
                 getData = {this.got.getAllHouses}
                 renderNeedFields={item => item.name}
-            />
-        );
-
-
-        const houseDetails = (
-        <CharDetails itemId={this.state.itemId} getDatas = {this.got.getHouse}>
-            <Field field='region' label='Region'/>
-            <Field field='words' label='Words'/>
-            <Field field='titles' label='Titles'/>
-            <Field field='overlord' label='Overlord'/>
-            <Field field='ancestralWeapons' label='Ancestral Weapons'/>
-        </CharDetails>
-        )
-
-        return (
-            <BlockListAndDetails 
-                list={itemList} 
-                detail={houseDetails}
             />
         )
     }
 }
+
+export default withRouter(HousePage);

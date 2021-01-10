@@ -1,18 +1,15 @@
 import React from 'react';
-import {Col, Row, Container} from 'reactstrap';
 import ItemList from '../itemList';
-import CharDetails, {Field} from '../charDetails';
-import BlockListAndDetails from '../blockListAndDetails/blockListAndDetails'
-
 
 import gotService from '../../services/gotService';
-import ErrorMessage from '../errorMessage/errorMessage'
+import ErrorMessage from '../errorMessage/errorMessage';
 
-export default class CharacterPage extends React.Component {
+import {withRouter} from 'react-router-dom'
+
+class CharacterPage extends React.Component {
     got = new gotService()
 
     state = {
-        itemId: null,
         error: false
     }
 
@@ -23,10 +20,6 @@ export default class CharacterPage extends React.Component {
         })
     }
 
-    getId = id => {
-        this.setState({itemId: id})
-    }
-
     render() {
 
         if (this.state.error) {
@@ -34,29 +27,16 @@ export default class CharacterPage extends React.Component {
             return <ErrorMessage/>
         }
 
-        const itemList = (                    
-            <ItemList 
-                getId={this.getId} 
-                getData = {this.got.getAllCharacters}
-                renderNeedFields={({name, gender}) => `${name} (${gender})`}
-            />
-        );
-
-        const charDetails = (
-        <CharDetails itemId={this.state.itemId} getDatas = {this.got.getCharacter}>
-            <Field field='gender' label='Gender'/>
-            <Field field='culture' label='Culture'/>
-            <Field field='born' label='Born'/>
-            <Field field='died' label='Died'/>
-        </CharDetails>
-        )
-
         return (
-            <BlockListAndDetails 
-                list={itemList} 
-                detail={charDetails}
-            />
+
+        <ItemList 
+
+            getId={id =>{this.props.history.push(`/characters/${id}`)}} 
+            getData = {this.got.getAllCharacters}
+            renderNeedFields={item => item.name}
+        />
         )
     }
-
 }
+
+export default withRouter(CharacterPage);

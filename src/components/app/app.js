@@ -6,14 +6,13 @@ import RandomChar from '../randomChar';
 import CharacterPage from '../pages/characterPage';
 import BookPage from '../pages/bookPage';
 import HousePage from '../pages/housePage';
+import BooksItem from '../pages/booksItem';
+import CharsItem from '../pages/charsItem';
+import HousesItem from '../pages/housesItem';
 
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import './apps.css';
-
-
-import ItemList from '../itemList';
-import CharDetails from '../charDetails';
 
 import gotService from '../../services/gotService';
 
@@ -55,10 +54,37 @@ class App extends React.Component {
                             </Col>
                         </Row>
 
-                        <Route path='/characters' component={CharacterPage}/>
-                        <Route path='/books' component={BookPage}/>
-                        <Route path='/houses' component={HousePage}/>
 
+
+                        <Route exact path='/characters' component={CharacterPage}/>
+
+                        <Route path='/characters/:id' 
+
+                            render={
+                                ({match}) => {
+                                    const {id} = match.params;
+                                    return <CharsItem itemId={id}/>
+                                    }}
+                        />
+
+                        <Route exact path='/houses' component={HousePage}/>
+
+                        <Route path='/houses/:id' 
+                            render={({match}) => {
+                                    const {id} = match.params;
+                                    return <HousesItem itemId={id}/>
+                                }}/>
+                        
+                        <Route exact path='/books' component={BookPage}/>
+                        
+                        <Route path='/books/:id' 
+
+                            render={
+                                ({match}) => {
+                                    const {id} = match.params;
+                                    return <BooksItem itemId={id}/>
+                                    }}
+                        />
                     </Container>
                 </div>
             </Router>

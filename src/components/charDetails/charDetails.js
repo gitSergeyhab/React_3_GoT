@@ -27,16 +27,15 @@ export default class CharDetails extends Component {
     }
 
     componentDidUpdate(prevProps){
-
         if (this.props.itemId !== prevProps.itemId) {
             this.getItemFromId()
         }
     }
 
     getItemFromId = () => {
+   
         if (!this.props.itemId) return;
         const {getDatas} = this.props;
-        console.log(this.props)
         
         getDatas(this.props.itemId)
             .then(item => this.setState({item}))
@@ -45,7 +44,7 @@ export default class CharDetails extends Component {
 
     render() {
         if (!this.state.item) {
-            return <h2 className="char-details rounded text-center">Choise anyone</h2>
+            return <h2 className="text-white">Choise anyone</h2>
         };
         const {item} = this.state;
 
