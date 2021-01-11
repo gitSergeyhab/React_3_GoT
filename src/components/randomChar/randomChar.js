@@ -9,7 +9,7 @@ export default class RandomChar extends Component {
 
     componentDidMount() {
         this.updateChar();
-        this.timer = setInterval(this.updateChar, 3333);
+        this.timer = setInterval(this.updateChar, 9999);
     }
 
     componentWillUnmount(){
