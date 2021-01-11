@@ -29,7 +29,7 @@ class BookPage extends React.Component {
 
          return (
             <ItemList 
-                getId={id =>{this.props.history.push(`/books/${id}`)}} 
+                getId={(id) => {this.props.history.push(id)}} 
                 getData = {this.got.getAllbooks}
                 renderNeedFields={item => item.name}
             />

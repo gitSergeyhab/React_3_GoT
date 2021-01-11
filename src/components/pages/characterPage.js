@@ -30,8 +30,7 @@ class CharacterPage extends React.Component {
         return (
 
         <ItemList 
-
-            getId={id =>{this.props.history.push(`/characters/${id}`)}} 
+            getId={id =>{this.props.history.push(id)}} 
             getData = {this.got.getAllCharacters}
             renderNeedFields={item => item.name}
         />

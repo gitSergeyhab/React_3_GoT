@@ -39,10 +39,12 @@ export default class CharDetails extends Component {
         
         getDatas(this.props.itemId)
             .then(item => this.setState({item}))
+        // console.log(this.state, this.props.itemId)
         // this.foo.bar = 0 // special fall
     }
 
     render() {
+        // console.log(this.state)
         if (!this.state.item) {
             return <h2 className="text-white">Choise anyone</h2>
         };

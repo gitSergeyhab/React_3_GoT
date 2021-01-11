@@ -47,7 +47,7 @@ export default class GotService {
             culture: this.noData(pers.culture),
             born: this.noData(pers.born),
             died: this.noData(pers.died),
-            url: +pers.url.match(/\d+/)[0]
+            url: pers.url.match(/\d+/)[0]
         }
     }
 
@@ -59,7 +59,7 @@ export default class GotService {
             titles: this.noData(house.titles),
             overlord: this.noData(house.overlord),
             ancestralWeapons: this.noData(house.ancestralWeapons),
-            url: +house.url.match(/\d+/)[0]
+            url: house.url.match(/\d+/)[0]
         }
     }
     
@@ -69,7 +69,7 @@ export default class GotService {
             numberOfPages: this.noData(book.numberOfPages),
             publiser: this.noData(book.publiser),
             released: this.noData(book.released),
-            url: +book.url.match(/\d+/)[0]
+            url: book.url.match(/\d+/)[0]
         }
     }
 

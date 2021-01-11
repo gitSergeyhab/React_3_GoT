@@ -81,6 +81,7 @@ class App extends React.Component {
 
                             render={
                                 ({match}) => {
+                                    console.log(match);
                                     const {id} = match.params;
                                     return <BooksItem itemId={id}/>
                                     }}

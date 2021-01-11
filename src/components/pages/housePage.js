@@ -30,7 +30,7 @@ class HousePage extends React.Component {
 
         return (
             <ItemList 
-                getId={id =>{this.props.history.push(`/houses/${id}`)}} 
+                getId={id =>{this.props.history.push(id)}} 
                 getData = {this.got.getAllHouses}
                 renderNeedFields={item => item.name}
             />
